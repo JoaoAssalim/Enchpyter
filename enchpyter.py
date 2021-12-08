@@ -1,3 +1,9 @@
+'''This program can help you to encrypt some text
+it can variate while you configure it
+
+Code in Github: https://github.com/JoaoAssalim/Enchpyter
+'''
+
 class Enchpyter:
     
     def __init__(self, total_encrypt_number):
@@ -45,7 +51,7 @@ if __name__ == '__main__':
             elif option == 2:
                 word = input('Word to decrypt (Just Letters): ').upper()
                 if not any(chr.isdigit() for chr in word):
-                    encpt.encrypt(word)
+                    encpt.decrypt(word)
                 else:
                     print('Number in word')
             else:

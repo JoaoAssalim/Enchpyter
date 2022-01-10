@@ -42,6 +42,12 @@ class Enchpyter:
                 self.encrypted += 'b'
             elif letter == ']':
                 self.encrypted += 'v'
+            elif letter == '!':
+                self.encrypted += '!'
+            elif letter == '?':
+                self.encrypted += '?'
+            elif letter == '/':
+                self.encrypted += '/'
             elif letter.isdigit():
                 self.encrypted += letter
 
@@ -70,6 +76,12 @@ class Enchpyter:
                 self.decrypted += '.'
             elif letter == 'c':
                 self.decrypted += ','
+            elif letter == '!':
+                self.encrypted += '!'
+            elif letter == '?':
+                self.encrypted += '?'
+            elif letter == '/':
+                self.encrypted += '/'
             elif letter.isdigit():
                 self.decrypted += letter
             else:

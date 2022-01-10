@@ -5,59 +5,88 @@ Code in Github: https://github.com/JoaoAssalim/Enchpyter
 '''
 
 class Enchpyter:
-    
-    def __init__(self, total_encrypt_number):
 
-        self.alfabeto = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
-        self.total_encrypt_number = total_encrypt_number
 
-    def encrypt(self, word):
-    
-        self.encrypt_word = ''
-        
+    def __init__(self, word):
+        self.word = word
+        self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ'
+
+
+    def encrypt(self):
+
+        self.encrypted = ''
         for letter in word:
-            self.index_letter = self.alfabeto.index(letter) + self.total_encrypt_number
-            if self.index_letter > len(self.alfabeto):
-                self.index_letter = self.index_letter - len(self.alfabeto) #Subtract the total by 25 and find the index
-            self.encrypt_word += self.alfabeto[self.index_letter]
-        print(self.encrypt_word)
-    
-    def decrypt(self, word):
-        
-        self.decrypt_word = ''
-        
-        for letter in word:
-            self.index_letter = self.alfabeto.index(letter) - self.total_encrypt_number
-            self.decrypt_word += self.alfabeto[self.index_letter]
-            
-        print(self.decrypt_word)
+            if letter in self.alphabet:
+                index = self.alphabet.index(letter)
+                index += 3
 
+                if index > 26:
+                    index -= 26
+                self.encrypted += self.alphabet[index]
 
-if __name__ == '__main__':
-    try:
-        total_encrypt_number = int(input('Enter how many numbers to jump index (25 is max): '))
-        if total_encrypt_number <= 25:
-        
-            encpt = Enchpyter(total_encrypt_number)
-            option = int(input('[1] - Encrypt\n[2] - Decrypt\n-> '))
-            
-            if option == 1:
-                word = input('Word to encrypt (Just Letters): ').upper()
-                if not any(chr.isdigit() for chr in word):
-                    encpt.encrypt(word)
-                else:
-                    print('Number in word')
-    
-            elif option == 2:
-                word = input('Word to decrypt (Just Letters): ').upper()
-                if not any(chr.isdigit() for chr in word):
-                    encpt.decrypt(word)
-                else:
-                    print('Number in word')
+            elif letter == ' ':
+                self.encrypted += 's'
+            elif letter == '.':
+                self.encrypted += 'd'
+            elif letter == ',':
+                self.encrypted += 'c'
+            elif letter == '(':
+                self.encrypted += 'e'
+            elif letter == ')':
+                self.encrypted += 'r'
+            elif letter == '{':
+                self.encrypted += 'k'
+            elif letter == '}':
+                self.encrypted += 'l'
+            elif letter == '[':
+                self.encrypted += 'b'
+            elif letter == ']':
+                self.encrypted += 'v'
+            elif letter.isdigit():
+                self.encrypted += letter
+
+        return self.encrypted
+
+    def decrypt(self):
+
+        self.decrypted = ''
+        for letter in word:           
+
+            if letter == 'e':
+                self.decrypted += '('
+            elif letter == 'r':
+                self.decrypted += ')'
+            elif letter == 'k':
+                self.decrypted += '{'
+            elif letter == 'l':
+                self.decrypted += '}'
+            elif letter == 'b':
+                self.decrypted += '['
+            elif letter == 'bc':
+                self.decrypted += ']'
+            elif letter == 's':
+                self.decrypted += ' '
+            elif letter == 'd':
+                self.decrypted += '.'
+            elif letter == 'c':
+                self.decrypted += ','
+            elif letter.isdigit():
+                self.decrypted += letter
             else:
-                print('Invalid Option!')
-        else:
-            print('Number greater than 25!')
+                index = self.alphabet.index(letter)
+                index -= 3
+                self.decrypted += self.alphabet[index]
 
-    except ValueError as e:
-        print('Error: ', e)
+        return self.decrypted
+
+choice_method = input('[1] - Encrypt\n[2] - Decrypt\n-> ')
+if choice_method == '1':
+    word = input('Enter a word: ').upper()
+    enchpyter = Enchpyter(word)
+    print(enchpyter.encrypt())
+elif choice_method == '2':
+    word = input('Enter a word: ')
+    enchpyter = Enchpyter(word)
+    print(enchpyter.decrypt())
+else:
+    print('Invalid Option')

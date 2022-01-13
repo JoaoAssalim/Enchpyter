@@ -9,7 +9,7 @@ class Enchpyter:
 
     def __init__(self, word):
         self.word = word
-        self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZÇ'
+        self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
     def encrypt(self):
@@ -46,6 +46,8 @@ class Enchpyter:
                 self.encrypted += '!'
             elif letter == '?':
                 self.encrypted += '?'
+            elif letter == '@':
+                self.encrypted += '@'
             elif letter == '/':
                 self.encrypted += '/'
             elif letter.isdigit():
@@ -77,11 +79,13 @@ class Enchpyter:
             elif letter == 'c':
                 self.decrypted += ','
             elif letter == '!':
-                self.encrypted += '!'
+                self.decrypted += '!'
             elif letter == '?':
-                self.encrypted += '?'
+                self.decrypted += '?'
             elif letter == '/':
-                self.encrypted += '/'
+                self.decrypted += '/'
+            elif letter == '@':
+                self.decrypted += '@'
             elif letter.isdigit():
                 self.decrypted += letter
             else:

@@ -1,56 +1,54 @@
-'''This program can help you to encrypt some text
-it can variate while you configure it
-
-Code in Github: https://github.com/JoaoAssalim/Enchpyter
-'''
-
 class Enchpyter:
 
 
     def __init__(self, word):
+        self.jumps = 3
         self.word = word
-        self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        self.upperletter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        self.lowerletter = 'abcdefghijklmnopqrstuvwxyz'
 
 
     def encrypt(self):
 
         self.encrypted = ''
         for letter in word:
-            if letter in self.alphabet:
-                index = self.alphabet.index(letter)
-                index += 3
+            if letter in self.upperletter:
+                index = self.upperletter.index(letter)
+                index += self.jumps
 
                 if index > 26:
                     index -= 26
-                self.encrypted += self.alphabet[index]
+                self.encrypted += self.upperletter[index]
+
+            elif letter in self.lowerletter:
+                index = self.lowerletter.index(letter)
+                index += self.jumps
+
+                if index > 26:
+                    index -= 26
+                self.encrypted += self.lowerletter[index]
 
             elif letter == ' ':
-                self.encrypted += 's'
+                self.encrypted += 'Ç'
             elif letter == '.':
-                self.encrypted += 'd'
+                self.encrypted += 'ç'
             elif letter == ',':
-                self.encrypted += 'c'
+                self.encrypted += '&'
             elif letter == '(':
-                self.encrypted += 'e'
+                self.encrypted += '>'
             elif letter == ')':
-                self.encrypted += 'r'
+                self.encrypted += '<'
             elif letter == '{':
-                self.encrypted += 'k'
+                self.encrypted += ';'
             elif letter == '}':
-                self.encrypted += 'l'
+                self.encrypted += ':'
             elif letter == '[':
-                self.encrypted += 'b'
+                self.encrypted += '|'
             elif letter == ']':
-                self.encrypted += 'v'
-            elif letter == '!':
-                self.encrypted += '!'
-            elif letter == '?':
-                self.encrypted += '?'
-            elif letter == '@':
-                self.encrypted += '@'
-            elif letter == '/':
-                self.encrypted += '/'
+                self.encrypted += '-'
             elif letter.isdigit():
+                self.encrypted += letter
+            else:
                 self.encrypted += letter
 
         return self.encrypted
@@ -60,44 +58,42 @@ class Enchpyter:
         self.decrypted = ''
         for letter in word:           
 
-            if letter == 'e':
+            if letter == '>':
                 self.decrypted += '('
-            elif letter == 'r':
+            elif letter == '<':
                 self.decrypted += ')'
-            elif letter == 'k':
+            elif letter == ';':
                 self.decrypted += '{'
-            elif letter == 'l':
+            elif letter == ':':
                 self.decrypted += '}'
-            elif letter == 'b':
+            elif letter == '|':
                 self.decrypted += '['
-            elif letter == 'bc':
+            elif letter == '-':
                 self.decrypted += ']'
-            elif letter == 's':
+            elif letter == 'Ç':
                 self.decrypted += ' '
-            elif letter == 'd':
+            elif letter == 'ç':
                 self.decrypted += '.'
-            elif letter == 'c':
+            elif letter == '&':
                 self.decrypted += ','
-            elif letter == '!':
-                self.decrypted += '!'
-            elif letter == '?':
-                self.decrypted += '?'
-            elif letter == '/':
-                self.decrypted += '/'
-            elif letter == '@':
-                self.decrypted += '@'
             elif letter.isdigit():
                 self.decrypted += letter
+            elif letter in self.upperletter:
+                index = self.upperletter.index(letter)
+                index -= self.jumps
+                self.decrypted += self.upperletter[index]
+            elif letter in self.lowerletter:
+                index = self.lowerletter.index(letter)
+                index -= self.jumps
+                self.decrypted += self.lowerletter[index]
             else:
-                index = self.alphabet.index(letter)
-                index -= 3
-                self.decrypted += self.alphabet[index]
+                self.decrypted += letter
 
         return self.decrypted
 
 choice_method = input('[1] - Encrypt\n[2] - Decrypt\n-> ')
 if choice_method == '1':
-    word = input('Enter a word: ').upper()
+    word = input('Enter a word: ')
     enchpyter = Enchpyter(word)
     print(enchpyter.encrypt())
 elif choice_method == '2':

@@ -17,5 +17,3 @@ clone my project with git
 ## Feedback
 
 If you have any feedback, please reach out to us at assalim.py@gmail.com
-
-Video on Youtube: https://www.youtube.com/watch?v=7puD_J_jCTY
